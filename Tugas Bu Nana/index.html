@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pendaftaran Ekskul</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="formUtama">
+        <h1 class="judulForm">
+            Form Pendaftaran Ekskul<br>
+            SMK Letris Pamulang
+        </h1>
+        <form class="formPendaftaran">
+            <div>
+                <label for="inputNama">Nama Lengkap:</label><br>
+                <input type="text" id="inputNama" class="inputNama" placeholder="Masukkan nama siswa">
+            </div>
+            <div>
+                <label>Kelas:</label>
+                <div class="pilihanKelas">
+                    <label><input type="radio" name="kelas" value="X"> X</label>
+                    <label><input type="radio" name="kelas" value="XI"> XI</label>
+                    <label><input type="radio" name="kelas" value="XII"> XII</label>
+                </div>
+            </div>
+            <div>
+                <label for="inputJurusan">Jurusan:</label><br>
+                <select id="inputJurusan" class="inputJurusan">
+                    <option value="" disabled selected>-- Pilih Jurusan --</option>
+                    <option value="PPLG">PPLG</option>
+                    <option value="DKV">DKV</option>
+                    <option value="TKJT">TKJT</option>
+                    <option value="AKL">AKL</option>
+                    <option value="BDP">BDP</option>
+                    <option value="MPLB">MPLB</option>
+                </select>
+            </div>
+            <div>
+                <label for="inputEkskul">Pilihan Ekskul:</label><br>
+                <select id="inputEkskul" class="inputEkskul">
+                    <option value="" disabled selected>-- Pilih Ekstrakurikuler --</option>
+                    <option value="Animasi">Animasi</option>
+                    <option value="Paskibra">Paskibra</option>
+                    <option value="Volly">Volly</option>
+                    <option value="Basket">Basket</option>
+                    <option value="Futsal">Futsal</option>
+                    <option value="Letsin">Letsin</option>
+                    <option value="PMR">PMR</option>
+                    <option value="Dance Modern">Dance Modern</option>
+                </select>
+            </div>
+            <button type="submit" class="addButton">Tambah Data</button>
+        </form>
+    </div>
+    <div class="bagianData">
+        <h1>Data Pendaftaran Siswa</h1>
+        <div class="tableWrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Jurusan</th>
+                        <th>Ekskul</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="dataPendaftaran"></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        let dataSiswa = [];
+        let indexEdit = -1;
+        let form = document.querySelector(".formPendaftaran");
+        let nama = document.querySelector(".inputNama");
+        let jurusan = document.querySelector(".inputJurusan");
+        let ekskul = document.querySelector(".inputEkskul");
+        let tabel = document.querySelector(".dataPendaftaran");
+        let tombol = document.querySelector(".addButton");
+
+        // menampilkan data ke tabel
+        function tampilData() {
+            tabel.innerHTML = "";
+            for (let i = 0; i < dataSiswa.length; i++) {
+                tabel.innerHTML += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${dataSiswa[i].nama}</td>
+                        <td>${dataSiswa[i].kelas}</td>
+                        <td>${dataSiswa[i].jurusan}</td>
+                        <td>${dataSiswa[i].ekskul}</td>
+                        <td>
+                            <button class="editButton" onclick="editData(${i})">Edit</button>
+                            <button class="deleteButton" onclick="hapusData(${i})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // saat tombol tambah ditekan
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let kelas = document.querySelector('input[name="kelas"]:checked');
+            // mengecek apakah semua data sudah diisi
+            if (nama.value == "" || kelas == null || jurusan.value == "" || ekskul.value == "") {
+                alert("Semua data wajib diisi!");
+                return;
+            }
+            let dataBaru = {
+                nama: nama.value,
+                kelas: kelas.value,
+                jurusan: jurusan.value,
+                ekskul: ekskul.value
+            };
+            // kalau belum edit, data baru ditambahkan
+            if (indexEdit == -1) {
+                dataSiswa.push(dataBaru);
+                alert("Data berhasil ditambah!");
+            } else {
+                // kalau sedang edit, data lama diganti
+                dataSiswa[indexEdit] = dataBaru;
+                alert("Data berhasil di edit!");
+                indexEdit = -1;
+                tombol.innerHTML = "Tambah Data";
+            }
+            tampilData();
+            form.reset();
+        });
+
+        // untuk mengedit data
+        function editData(index) {
+            let data = dataSiswa[index];
+            nama.value = data.nama;
+            document.querySelector('input[name="kelas"][value="' + data.kelas + '"]').checked = true;
+            jurusan.value = data.jurusan;
+            ekskul.value = data.ekskul;
+            indexEdit = index;
+            tombol.innerHTML = "Simpan Edit";
+            window.scrollTo(0, 0);
+        }
+
+        // untuk menghapus data
+        function hapusData(index) {
+            dataSiswa.splice(index, 1);
+            tampilData();
+            alert("Data berhasil di hapus!");
+        }
+    </script>
+</body>
+</html>

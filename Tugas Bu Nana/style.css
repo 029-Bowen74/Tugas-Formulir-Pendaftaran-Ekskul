@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: white;
+    color: dimgray;
+}
+
+.formUtama {
+    width: 465px;
+    margin: 50px auto 0;
+}
+
+.judulForm {
+    text-align: center;
+    color: blue;
+    font-size: 22px;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.formPendaftaran label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.formPendaftaran div {
+    margin-bottom: 16px;
+}
+
+.inputNama,
+.inputJurusan,
+.inputEkskul {
+    width: 100%;
+    height: 36px;
+    margin-top: 6px;
+    padding: 8px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.pilihanKelas {
+    margin-top: 8px;
+}
+
+.pilihanKelas label {
+    font-weight: normal;
+    margin-right: 14px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.pilihanKelas input {
+    margin-right: 5px;
+}
+
+.addButton {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 9px 17px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.addButton:hover {
+    background-color: darkgreen;
+}
+
+.bagianData {
+    width: 465px;
+    margin: 10px auto 50px;
+}
+
+.bagianData h1 {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 14px;
+}
+
+/* Bungkus tabel agar sudut membulat rapi tanpa merusak border/warna */
+.tableWrapper {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid lightgray;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    background-color: blue;
+    color: white;
+    padding: 11px 10px;
+    text-align: left;
+    /* garis putih samar antar kolom header, biar rapi tapi tetap menyatu */
+    border-right: 1px solid white;
+}
+
+th:last-child {
+    border-right: none;
+}
+
+td {
+    padding: 10px;
+    /* garis samar antar sel, jadi jaraknya terlihat tanpa border tebal */
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid whitesmoke;
+    background-color: white;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:nth-child(even) td {
+    background-color: whitesmoke;
+}
+
+tbody tr:hover td {
+    background-color: lavender;
+}
+
+.editButton {
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.editButton:hover {
+    background-color: darkorange;
+}
+
+.deleteButton:hover {
+    background-color: darkred;
+}
